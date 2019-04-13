@@ -1,0 +1,28 @@
+{
+  "name": "api-maker-dao",
+  "version": "1.0.0",
+  "description": "⚒ Opinionated, REST-ful API to access data from MakerDAO via the mkr.tools website.",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "standard",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joemccann/api-maker-dao.git"
+  },
+  "keywords": [],
+  "author": "Joe McCann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joemccann/api-maker-dao/issues"
+  },
+  "homepage": "https://github.com/joemccann/api-maker-dao#readme",
+  "dependencies": {
+    "metric-maker-dao": "github:joemccann/metric-maker-dao"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1",
+    "tape": "^4.10.1"
+  }
+}
