@@ -2,12 +2,22 @@ const test = require('tape')
 const { 'api-maker-dao': mkr } = require('.')
 
 //
-// Create a stubbed response object
+// Create a mock request and response method
 //
+
+function status (code) {
+  this.statusCode = code
+  return this
+}
+
+function send (obj) {
+  const body = { ...this, ...obj }
+  return body
+}
+
 const res = {
-  send: (body) => {
-    return body
-  }
+  status,
+  send
 }
 
 test('sanity', t => {
@@ -21,7 +31,8 @@ test('pass - actions', async t => {
       method: 'actions'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -33,7 +44,8 @@ test('pass - blocks', async t => {
       method: 'blocks'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -45,7 +57,8 @@ test('pass - stats', async t => {
       method: 'stats'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -57,7 +70,8 @@ test('pass - percentage', async t => {
       method: 'percentage'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -70,7 +84,8 @@ test('pass - percentage and historical', async t => {
       method: 'percentage'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -82,7 +97,8 @@ test('pass - locked', async t => {
       method: 'locked'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -94,7 +110,8 @@ test('pass - percentage', async t => {
       method: 'wrapped'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 200)
   t.ok(!err)
   t.ok(data)
   t.end()
@@ -106,7 +123,8 @@ test('fail - unsupported method', async t => {
       method: 'fail'
     }
   }
-  const { err, data } = await mkr(req, res)
+  const { err, data, statusCode } = await mkr(req, res)
+  t.equals(statusCode, 404)
   t.ok(err)
   t.equal(err, `Method, fail, is not supported.`)
   t.ok(!data)

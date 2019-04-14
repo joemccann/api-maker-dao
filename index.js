@@ -44,15 +44,15 @@ exports['api-maker-dao'] = async (req, res) => {
   let historical = body.historical || query.historical || false
   let method = body.method || query.method
 
-  if (!method) return res.send({ err: ERR_NO_METHOD })
+  if (!method) return res.status(404).send({ err: ERR_NO_METHOD })
 
   const { err: normErr, data: normalMethod } = normalizeMethod(method)
 
-  if (normErr) return res.send({ err: normErr })
+  if (normErr) return res.status(404).send({ err: normErr })
 
   const { err, data } = await maker[normalMethod]({ historical })
 
-  if (err) return res.send({ err: err.message || err })
+  if (err) return res.status(404).send({ err: err.message || err })
 
-  return res.send({ data })
+  return res.status(200).send({ data })
 }
