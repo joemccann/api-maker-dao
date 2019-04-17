@@ -1,6 +1,6 @@
 {
   "name": "api-maker-dao",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "⚒ Opinionated, REST-ful API to access data from MakerDAO via the mkr.tools website.",
   "main": "index.js",
   "scripts": {
