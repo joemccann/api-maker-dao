@@ -1,3 +1,4 @@
+const cors = require('cors-for-cloud-functions')
 const Maker = require('metric-maker-dao')
 const maker = new Maker()
 
@@ -35,7 +36,11 @@ const normalizeMethod = (method) => {
   return { data }
 }
 
-exports['api-maker-dao'] = async (req, res) => {
+exports['api-maker-dao'] = async (request, response) => {
+  const { req, res, isOptions } = cors(request, response)
+
+  if (isOptions) return res.status(204).send('')
+
   const {
     body = {},
     query = {}

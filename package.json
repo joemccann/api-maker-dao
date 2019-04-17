@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/joemccann/api-maker-dao#readme",
   "dependencies": {
+    "cors-for-cloud-functions": "github:joemccann/cors-for-cloud-functions",
     "metric-maker-dao": "github:joemccann/metric-maker-dao"
   },
   "devDependencies": {
